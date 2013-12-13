@@ -1,0 +1,45 @@
+#!/bin/sh
+
+script_dir=$(cd $(dirname $0) && pwd)
+base_dir=$script_dir/..
+
+fluentd_dir="$script_dir/../fluentd"
+tmp_dir="$script_dir/../tmp"
+
+config="$fluentd_dir/fluent.conf"
+pid_file="$tmp_dir/fluentd.pid"
+log_file="$tmp_dir/fluentd.log"
+
+
+case "$1" in
+    start)
+        echo "starting fluentd"
+        cd $base_dir && bundle exec fluentd -c $config --daemon "$pid_file" --log "$log_file"
+        echo $?
+        ;;
+    stop)
+        echo "stopping fluentd"
+        kill -TERM `cat $pid_file`
+        echo $?
+        ;;
+    force-stop)
+        echo "force stopping fluentd"
+        pid=`cat $pid_file`
+        childs=`ps --ppid=$pid | cut -d' ' -f1`
+        kill -KILL $pid $childs
+        echo $?
+        ;;
+    reload)
+        echo "reloading fluentd"
+        kill -HUP `cat $pid_file`
+        echo $?
+        ;;
+    restart|force-reload)
+        $0 stop
+        $0 start
+        ;;
+    *)
+        echo "Usage: fluentd {start|stop|force-stop|reload|restart}"
+        exit 1
+        ;;
+esac

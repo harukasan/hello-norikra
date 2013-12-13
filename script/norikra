@@ -1,0 +1,31 @@
+#!/bin/sh
+
+script_dir=$(cd $(dirname $0) && pwd)
+base_dir=$(cd "$script_dir/../norikra" && pwd)
+shared_dir=$(cd "$script_dir/../tmp" && pwd)
+log_dir=$(cd "$script_dir/../tmp" && pwd)
+
+pid_file="$shared_dir/norikra.pid"
+stats_file="$shared_dir/norikra.json"
+
+norikra_opts="-d --pidfile=$pid_file --stats=$stats_file --logdir=$log_dir --micro"
+java_opts="-Xmx1g -Xms1g -XX:+UseConcMarkSweepGC -Xloggc:$log_dir/gc.log -XX:+PrintGCDateStamps -XX:+PrintGCDetails"
+
+case "$1" in
+    start)
+        echo "starting norikra"
+        cd $base_dir && bundle exec norikra start $java_opts $norikra_opts
+        ;;
+    stop)
+        echo "stopping norikra"
+        cd $base_dir && bundle exec norikra stop --pidfile=$pid_file
+        ;;
+    fast-stop)
+        echo "fast stopping norikra"
+        kill -TERM `cat $pid_file`
+        ;;
+    *)
+        echo "Usage: norikra {start|stop|fast-stop}"
+        exit 1
+        ;;
+esac

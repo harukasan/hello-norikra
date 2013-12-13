@@ -1,0 +1,101 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    backports (3.3.5)
+    celluloid (0.12.4)
+      facter (>= 1.6.12)
+      timers (>= 1.0.0)
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
+    choice (0.1.6)
+    cool.io (1.1.1)
+      iobuffer (>= 1.0.0)
+    erubis (2.7.0)
+    facter (1.7.3)
+    ffi (1.9.3-java)
+    fluent-mixin-config-placeholders (0.2.3)
+      fluentd
+      uuidtools
+    fluent-plugin-dummydata-producer (0.0.1)
+      fluent-mixin-config-placeholders
+      fluentd
+    fluent-plugin-norikra (0.1.0)
+      fluentd
+      norikra-client (>= 0.0.7)
+    fluentd (0.10.41)
+      cool.io (~> 1.1.1)
+      http_parser.rb (~> 0.5.1)
+      json (>= 1.4.3)
+      msgpack (>= 0.4.4, < 0.6.0, != 0.5.3, != 0.5.2, != 0.5.1, != 0.5.0)
+      yajl-ruby (~> 1.0)
+    http_parser.rb (0.5.3)
+    httpclient (2.3.0.1)
+    iobuffer (1.1.2)
+    json (1.8.1)
+    ltsv (0.1.0)
+    mizuno (0.6.6)
+      childprocess (>= 0.2.6)
+      choice (>= 0.1.0)
+      ffi (>= 1.0.0)
+      rack (>= 1.0.0)
+    msgpack (0.5.7)
+    msgpack-jruby (1.3.2-java)
+    msgpack-rpc-over-http (0.0.5)
+      celluloid (~> 0.12.3)
+      httpclient (~> 2.3.0.1)
+      msgpack (~> 0.5.5)
+      rack (~> 1.4.1)
+    msgpack-rpc-over-http-jruby (0.0.5)
+      celluloid (~> 0.12.3)
+      httpclient (~> 2.3.0.1)
+      msgpack-jruby (~> 1.3.2)
+      rack
+    multi_json (1.8.2)
+    norikra (0.1.2-java)
+      erubis
+      mizuno (~> 0.6)
+      msgpack-rpc-over-http-jruby (>= 0.0.5)
+      norikra-client-jruby (~> 0.1.0)
+      rack
+      sinatra
+      sinatra-contrib
+      thor
+    norikra-client (0.1.1)
+      ltsv
+      msgpack-rpc-over-http (>= 0.0.4)
+      thor
+    norikra-client-jruby (0.1.1-java)
+      ltsv
+      msgpack-rpc-over-http-jruby (>= 0.0.4)
+      thor
+    rack (1.4.5)
+    rack-protection (1.5.1)
+      rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    sinatra-contrib (1.4.2)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (~> 1.3)
+    thor (0.18.1)
+    tilt (1.4.1)
+    timers (1.1.0)
+    uuidtools (2.1.4)
+    yajl-ruby (1.1.0)
+
+PLATFORMS
+  java
+  ruby
+
+DEPENDENCIES
+  fluent-plugin-dummydata-producer
+  fluent-plugin-norikra
+  fluentd
+  norikra
